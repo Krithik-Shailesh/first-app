@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useRouter } from 'next/router'
 import signInStyles from '../styles/Signin.module.css'
 import Link from 'next/link';
+import { addAccount } from './api/api_service';
 
 const signup = () => {
 
     const route = useRouter();
-    const [username, setUserName] = useState('');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
@@ -14,11 +15,19 @@ const signup = () => {
     const handleSubmit = e =>{
         e.preventDefault();
         const data = {
-          username,
+          name,
+          email,
+          phone,
           password
         }
-        console.log(data)
-        route.push('/home')
+        
+        console.log("apiData",data);
+
+        addAccount(data).then(res => {
+            if(res.res === 'success'){
+                route.push('/success')
+            }
+        })
     }
 
     return(
@@ -32,7 +41,7 @@ const signup = () => {
             id="username"
             name="username"
             type="text"
-            onChange={e => setUserName(e.target.value)}
+            onChange={e => setName(e.target.value)}
             placeholder='Username'
             autoComplete="username"
             required

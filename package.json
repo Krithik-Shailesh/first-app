@@ -1,6 +1,7 @@
 {
   "name": "first-app",
   "private": true,
+  "proxy": "http://localhost:5001",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

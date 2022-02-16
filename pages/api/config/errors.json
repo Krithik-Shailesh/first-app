@@ -1,0 +1,5 @@
+{
+    "INVALID_EMAIL": "Unable to get email from request.",
+    "INVALID_DETAILS": "Unable to get the required details from request.",
+    "INVALID_PASSWORD": "Unable to get user password from request."
+}

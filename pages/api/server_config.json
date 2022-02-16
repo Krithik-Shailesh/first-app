@@ -1,0 +1,10 @@
+{
+    "db" : {
+        "url": "mongodb://localhost:27017/",
+        "user_name": "",
+        "password": "",
+        "db_name": "",
+        "collection": "" ,
+        "account_collection": "accounts"
+    }
+}
