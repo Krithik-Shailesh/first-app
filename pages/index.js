@@ -18,12 +18,19 @@ export default function Home() {
     }
     console.log(data)
     login(data).then(res => {
-      console.log(res)
-      if(res.res === 'success'){
+      if(typeof res.data === "object"){
         route.push('/home')
       }
+      else{
+        clearPassword()
+        alert('Invalid email or password.') 
+      }
     })
-    
+
+  }
+
+  const clearPassword = () => {
+    setPassword("")
   }
 
   return (
@@ -37,6 +44,7 @@ export default function Home() {
             id="email"
             name="email"
             type="text"
+            value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder='Email'
             autoComplete="email"
@@ -46,6 +54,7 @@ export default function Home() {
             className="mb-7 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             name="password"
+            value={password}
             onChange={e => setPassword(e.target.value)}
             placeholder='Password'
             type="password"
