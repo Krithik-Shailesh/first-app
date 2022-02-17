@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb');
 const { db } = require('../server_config.json')
-const Account = require('./account')
+const Account = require('./account');
+const Auth = require('./auth');
 
 class MongoDBConnector {
     constructor() {
@@ -24,6 +25,7 @@ class MongoDBConnector {
             this.db = this.mongoDBClient.db("Database")
             console.log('test')
             this.account = new Account(this.mongoDBClient);
+            this.auth = new Auth(this.mongoDBClient);
             return result
         }).catch(e => {
             this.closeDB()
@@ -37,6 +39,10 @@ class MongoDBConnector {
 
     addAccount(email, name, phone, password){
         return this.account.addAccount(email, name, phone, password)
+    }
+
+    login(email, password){
+        return this.auth.login(email, password);
     }
 
     closeDB() {

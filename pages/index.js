@@ -2,21 +2,28 @@ import { useState } from 'react';
 import { useRouter } from 'next/router'
 import signInStyles from '../styles/Signin.module.css'
 import Link from 'next/link';
+import { login } from './api/api_services/auth_service';
 
 export default function Home() {
   const route = useRouter();
-  const [username, setUserName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
 
   const handleSubmit = e =>{
     e.preventDefault();
     const data = {
-      username,
+      email,
       password
     }
     console.log(data)
-    route.push('/home')
+    login(data).then(res => {
+      console.log(res)
+      if(res.res === 'success'){
+        route.push('/home')
+      }
+    })
+    
   }
 
   return (
@@ -27,12 +34,12 @@ export default function Home() {
         <form onSubmit={handleSubmit} className="flex flex-col">
           <input
             className="mb-5 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            name="username"
+            id="email"
+            name="email"
             type="text"
-            onChange={e => setUserName(e.target.value)}
-            placeholder='Username'
-            autoComplete="username"
+            onChange={e => setEmail(e.target.value)}
+            placeholder='Email'
+            autoComplete="email"
             required
           />
           <input

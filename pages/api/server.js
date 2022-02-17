@@ -1,4 +1,5 @@
 const AccountRoute = require('./routes/account')
+const AuthRoute = require('./routes/auth')
 const MongoDBConnector = require('./db/index')
 
 const express = require('express')
@@ -24,6 +25,7 @@ server.get('/ping',function(req, res) {
 
 
 server.post('/d/addAccount', AccountRoute.addAccount)
+server.post('/d/login', AuthRoute.login)
 
 
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router'
 import signInStyles from '../styles/Signin.module.css'
 import Link from 'next/link';
-import { addAccount } from './api/api_service';
+import { addAccount } from './api/api_services/account_service'
 
 const signup = () => {
 
