@@ -17,7 +17,6 @@ class Account {
     addAccount(email, name, phone, password) {
 
         let accountObject = {
-            email: email,
             name: name,
             phone: phone,
             password: password

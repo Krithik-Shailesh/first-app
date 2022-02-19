@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import signInStyles from '../styles/Signin.module.css'
 import Link from 'next/link';
 import { login } from './api/api_services/auth_service';
+import HashUtils from './utils/hashUtils';
 
 export default function Home() {
   const route = useRouter();
@@ -12,11 +13,16 @@ export default function Home() {
 
   const handleSubmit = e =>{
     e.preventDefault();
+
+    let emailHash = HashUtils.getHashedData(email)
+    let passwordHash = HashUtils.getPasswordHash(password)
+
     const data = {
-      email,
-      password
+      emailHash,
+      passwordHash
     }
     console.log(data)
+  
     login(data).then(res => {
       if(typeof res.data === "object"){
         route.push('/home')

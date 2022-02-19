@@ -1,3 +1,4 @@
+const HashUtils = require('../../utils/hashUtils');
 const MongoDBConnector = require('../db/index')
 
 class Auth {
@@ -6,8 +7,6 @@ class Auth {
         if (!email || email.trim().length == 0) {
             return Promise.reject("Invalid Email ID")
         }
-        email = email.trim();
-        email = email.toLowerCase();
 
         return MongoDBConnector.getInstance().login(email, password).then(res => {
             console.log("Auth res",res)

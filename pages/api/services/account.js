@@ -1,3 +1,4 @@
+const HashUtils = require('../../utils/hashUtils');
 const MongoDBConnector = require('../db/index')
 
 class Account{
@@ -8,7 +9,10 @@ class Account{
         email = email.trim();
         email = email.toLowerCase();
 
-        return MongoDBConnector.getInstance().addAccount(email, name, phone, password)
+        let emailHash = HashUtils.getHashedData(email)
+        let passwordHash = HashUtils.getPasswordHash(password)
+
+        return MongoDBConnector.getInstance().addAccount(emailHash, name, phone, passwordHash)
         .catch(err => {
             Promise.reject(err)
         })
